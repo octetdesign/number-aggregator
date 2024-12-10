@@ -1,4 +1,5 @@
 import * as vscode from 'vscode'
+import { Big } from 'big.js'
 
 /** ステータスバーアイテム */
 let statusBarItem: vscode.StatusBarItem
@@ -79,7 +80,7 @@ const updateStatusBar = async (force: boolean = false) => {
   const numbers = extractNumbers(selectedText)
 
   if (!force && (numbers.length > maxNumbers || selectedText.length > maxSelectionLength)) {
-    statusBarItem.text = '🧮選択範囲の数値を集計'
+    statusBarItem.text = '🔢選択範囲の数値を集計'
     statusBarItem.tooltip = `クリックして選択範囲の数値を集計（数字の数: ${numbers.length}, 選択文字数: ${selectedText.length}）`
     statusBarItem.command = 'numberAggregator.aggregateSelectedText'
     statusBarItem.show()
@@ -99,15 +100,19 @@ const extractNumbers = (text: string) => {
 /** 数値を集計する */
 const aggregate = (numbers: number[]) => {
   const count = numbers.length
-  const total = numbers.reduce((sum, num) => sum + num, 0)
-  const average = count > 0 ? total / count : 0
+  let total = new Big(0)
+  numbers.forEach((num) => {
+    total = total.plus(new Big(num))
+  })
+  const average = count > 0 ? total.div(new Big(count)) : new Big(0)
 
-  return { count, total, average }
+  return { count, total: total.toNumber(), average: average.toNumber() }
 }
 
 /** ステータスバーアイテム用の集計結果テキストを取得する */
 const getAggregateResultForStatus = ({ count, total, average }: ReturnType<typeof aggregate>) => {
-  return `個数: ${count} 合計: ${total} 平均: ${average}`
+  const toFixed = (num: number) => num.toFixed(2).replace(/0+$/, '').replace(/\.$/, '')
+  return `🔢 個数: ${count} 合計: ${toFixed(total)} 平均: ${toFixed(average)}`
 }
 
 /** クリップボードコピー用の集計結果テキストを取得する */
