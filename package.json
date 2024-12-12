@@ -1,14 +1,24 @@
 {
   "name": "number-aggregator",
   "displayName": "Number Aggregator",
-  "description": "選択した文字列から数値を集計してステータスバーに表示する VS Code 拡張機能。",
   "version": "0.0.1",
+  "publisher": "octetdesign",
+  "description": "選択した文字列から数値を集計してステータスバーに表示する VS Code 拡張機能。",
   "engines": {
     "vscode": "^1.95.0"
+  },
+  "author": {
+    "name": "OCTET DESIGN"
   },
   "categories": [
     "Other"
   ],
+  "pricing": "Free",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/octetdesign/number-aggregator.git"
+  },
   "activationEvents": [
     "onStartupFinished"
   ],
@@ -17,11 +27,13 @@
     "commands": [
       {
         "command": "numberAggregator.aggregateSelectedText",
-        "title": "選択範囲の数値を集計"
+        "title": "選択範囲の数値を集計",
+        "category": "Number Aggregator"
       },
       {
         "command": "numberAggregator.copyResults",
-        "title": "集計結果をコピー"
+        "title": "集計結果をコピー",
+        "category": "Number Aggregator"
       }
     ],
     "configuration": {
