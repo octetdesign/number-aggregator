@@ -4,6 +4,9 @@ import { Big } from 'big.js'
 /** ステータスバーアイテム */
 let statusBarItem: vscode.StatusBarItem
 
+/** アイコン */
+let icon = '🔢' // '🧮'
+
 /** 拡張機能の有効化（初期化処理） */
 export const activate = (context: vscode.ExtensionContext) => {
   // ステータスバーアイテムの生成と登録
@@ -80,7 +83,7 @@ const updateStatusBar = async (force: boolean = false) => {
   const numbers = extractNumbers(selectedText)
 
   if (!force && (numbers.length > maxNumbers || selectedText.length > maxSelectionLength)) {
-    statusBarItem.text = '🔢選択範囲の数値を集計'
+    statusBarItem.text = `${icon}選択範囲の数値を集計`
     statusBarItem.tooltip = `クリックして選択範囲の数値を集計（数字の数: ${numbers.length}, 選択文字数: ${selectedText.length}）`
     statusBarItem.command = 'numberAggregator.aggregateSelectedText'
     statusBarItem.show()
@@ -112,7 +115,7 @@ const aggregate = (numbers: number[]) => {
 /** ステータスバーアイテム用の集計結果テキストを取得する */
 const getAggregateResultForStatus = ({ count, total, average }: ReturnType<typeof aggregate>) => {
   const toFixed = (num: number) => num.toFixed(2).replace(/0+$/, '').replace(/\.$/, '')
-  return `🔢 個数: ${count} 合計: ${toFixed(total)} 平均: ${toFixed(average)}`
+  return `${icon} 個数: ${count} 合計: ${toFixed(total)} 平均: ${toFixed(average)}`
 }
 
 /** クリップボードコピー用の集計結果テキストを取得する */
