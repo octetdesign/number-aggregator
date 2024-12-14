@@ -9,9 +9,13 @@ let icon = '🔢' // '🧮'
 
 /** 設定 */
 interface ExtensionSettings {
+  /** 集計を行う数字の最大数 */
   maxNumbers: number
+  /** 集計を行う最大文字数 */
   maxSelectionLength: number
+  /** 前後にスペースや改行がある数字のみ集計対象にする */
   aggregateOnlyIsolatedNumbers: boolean
+  /** 小数点以下の桁数 */
   decimalPlaces: number
 }
 
