@@ -1,44 +1,32 @@
 import * as vscode from 'vscode'
-import { aggregateSelectedText, copyResults, createStatusBarItem, updateStatusBar } from './main'
+import {
+  aggregateSelectedText,
+  copyResults,
+  createStatusBarItem,
+  loadSettings,
+  updateStatusBar,
+} from './main'
 
 /** ステータスバーアイテム */
 let statusBarItem: vscode.StatusBarItem
 
-/** 設定 */
-export interface ExtensionSettings {
-  /** 集計を行う数字の最大数 */
-  maxNumbers: number
-  /** 集計を行う最大文字数 */
-  maxSelectionLength: number
-  /** 前後にスペースや改行がある数字のみ集計対象にする */
-  aggregateOnlyIsolatedNumbers: boolean
-  /** 小数点以下の桁数 */
-  decimalPlaces: number
-}
-
 /** 拡張機能の有効化（初期化処理） */
 export const activate = (context: vscode.ExtensionContext) => {
   // 設定の読み込み
-  const config = vscode.workspace.getConfiguration('number-aggregator')
-  const settings: ExtensionSettings = {
-    maxNumbers: config.get<number>('maxNumbers', 100),
-    maxSelectionLength: config.get<number>('maxSelectionLength', 1000),
-    aggregateOnlyIsolatedNumbers: config.get<boolean>('aggregateOnlyIsolatedNumbers', true),
-    decimalPlaces: config.get<number>('decimalPlaces', 2),
-  }
+  loadSettings()
 
   /* コマンドの登録 */
 
   // コマンド：選択範囲の数値を集計
   context.subscriptions.push(
     vscode.commands.registerCommand('number-aggregator.aggregateSelectedText', () => {
-      aggregateSelectedText(statusBarItem, settings)
+      aggregateSelectedText(statusBarItem)
     })
   )
   // コマンド：集計結果をクリップボードにコピー
   context.subscriptions.push(
     vscode.commands.registerCommand('number-aggregator.copyResults', () => {
-      copyResults(statusBarItem, settings)
+      copyResults(statusBarItem)
     })
   )
 
@@ -50,14 +38,14 @@ export const activate = (context: vscode.ExtensionContext) => {
 
   // テキストの選択変更時
   vscode.window.onDidChangeTextEditorSelection(() => {
-    return updateStatusBar(statusBarItem, settings)
+    return updateStatusBar(statusBarItem)
   })
   // アクティブなテキストエディタの変更時
   vscode.window.onDidChangeActiveTextEditor(() => {
-    return updateStatusBar(statusBarItem, settings)
+    return updateStatusBar(statusBarItem)
   })
   // 初回の更新
-  updateStatusBar(statusBarItem, settings)
+  updateStatusBar(statusBarItem)
 }
 
 /** 拡張機能の非アクティブ化（終了処理） */
