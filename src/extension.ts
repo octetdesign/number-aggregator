@@ -15,6 +15,12 @@ export const activate = (context: vscode.ExtensionContext) => {
   // 設定の読み込み
   loadSettings()
 
+  // 設定変更後
+  vscode.workspace.onDidChangeConfiguration((e) => {
+    // 設定の読み込み
+    loadSettings()
+  })
+
   /* コマンドの登録 */
 
   // コマンド：選択範囲の数値を集計
