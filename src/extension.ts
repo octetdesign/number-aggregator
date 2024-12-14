@@ -19,7 +19,7 @@ export interface ExtensionSettings {
 /** 拡張機能の有効化（初期化処理） */
 export const activate = (context: vscode.ExtensionContext) => {
   // 設定の読み込み
-  const config = vscode.workspace.getConfiguration('numberAggregator')
+  const config = vscode.workspace.getConfiguration('number-aggregator')
   const settings: ExtensionSettings = {
     maxNumbers: config.get<number>('maxNumbers', 100),
     maxSelectionLength: config.get<number>('maxSelectionLength', 1000),
@@ -31,13 +31,13 @@ export const activate = (context: vscode.ExtensionContext) => {
 
   // コマンド：選択範囲の数値を集計
   context.subscriptions.push(
-    vscode.commands.registerCommand('numberAggregator.aggregateSelectedText', () => {
+    vscode.commands.registerCommand('number-aggregator.aggregateSelectedText', () => {
       aggregateSelectedText(statusBarItem, settings)
     })
   )
   // コマンド：集計結果をクリップボードにコピー
   context.subscriptions.push(
-    vscode.commands.registerCommand('numberAggregator.copyResults', () => {
+    vscode.commands.registerCommand('number-aggregator.copyResults', () => {
       copyResults(statusBarItem, settings)
     })
   )
