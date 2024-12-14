@@ -1,71 +1,30 @@
-# number-aggregator README
+# Number Aggregator
 
-選択した文字列から数値を集計してステータスバーに表示する VS Code 拡張機能。
+エディタの選択範囲に含まれる数値を集計してリアルタイムにステータスバーに表示する Visual Studio Code 拡張機能です。
 
-## Features
+Excel に同じような機能がありますが、まさにそれを参考にしています。
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+## 特徴
 
-For example if there is an image subfolder under your extension project workspace:
+- エディタで選択された文字列から数値を抽出してステータスバーに集計値を表示します。
+  - コマンドパレットからコマンド`選択範囲の数値を集計`を選択して手動で集計を実行することもできます。
+- 表示される集計値は以下の通りです。
+  - 個数：抽出した数値の数
+  - 合計：抽出した数値の合計値
+  - 平均：抽出した数値の平均値
+- 集計結果をクリップボードにコピーすることができます。
+  - ステータスバーの集計結果をクリックするかコマンドパレットからコマンド`集計結果をコピー`を選択
+- エディタのパフォーマンスを考慮し、リアルタイム集計を抑制する条件を設定することができます。
 
-\!\[feature X\]\(images/feature-x.png\)
+## 設定
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- `numberAggregator.maxNumbers`: リアルタイム集計を行う対象となる数字の最大数です。選択範囲から抽出された数字の数がこの設定値を超えた場合、集計は行われず、ステータスバーには集計値が表示されなくなります。
+- `numberAggregator.maxSelectionLength`: リアルタイム集計を行う最大文字数です。選択範囲の文字数がこの設定値を超えた場合、集計は行われず、ステータスバーには集計値が表示されなくなります。
+- `numberAggregator.aggregateOnlyIsolatedNumbers`: 数字が含まれる単語の数字は集計対象としない。（前後にスペースや改行がある数字のみ集計対象にします。）
+- `numberAggregator.decimalPlaces`: 小数点以下の桁数。ステータスバーに表示される集計値の小数点以下の桁数を指定します。
 
-## Requirements
+## リリースノート
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+### 0.0.1
 
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-- `myExtension.enable`: Enable/disable this extension.
-- `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-- [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-- Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-- Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-- Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-- [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-- [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+最初のリリース
