@@ -104,10 +104,13 @@ const getSelectionData = (settings: ExtensionSettings) => {
 /** 文字列の中から数値を抽出する */
 const extractNumbers = (text: string, { aggregateOnlyIsolatedNumbers }: ExtensionSettings) => {
   const regex = aggregateOnlyIsolatedNumbers
-    ? /(?<!\S)-?\d{1,3}(,\d{3})*(\.\d+)?(?!\S)/g // 前後にスペースや改行がある数字のみ集計対象とする
-    : /-?\d{1,3}(,\d{3})*(\.\d+)?/g // 数字が含まれる単語の数字も集計対象とする
+    ? /(?<!\S)-?(?:\d{1,3}(?:,\d{3})*|\d+)(?:\.\d+)?(?!\S)/g // 前後にスペースや改行がある数字のみ集計対象とする
+    : /-?(?:\d{1,3}(?:,\d{3})*|\d+)(?:\.\d+)?/g // 数字が含まれる単語の数字も集計対象とする
   const matches = text.match(regex)
-  return matches ? matches.map((value) => Number(value.replaceAll(',', ''))) : []
+  const numbers = matches ? matches.map((value) => Number(value.replaceAll(',', ''))) : []
+  // console.log('[matches]', '\n' + matches?.join('\n'))
+  // console.log('[numbers]', '\n' + numbers.join('\n'))
+  return numbers
 }
 
 /** 数値を集計する */
