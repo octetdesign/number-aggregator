@@ -43,12 +43,12 @@
         "numberAggregator.maxNumbers": {
           "type": "number",
           "default": 30,
-          "description": "選択した文字列から抽出できる最大の数字の数。"
+          "description": "リアルタイム集計を行う数字の最大数。選択範囲から抽出された数字の数がこの設定値を超えると、集計を行わずステータスバーに集計値が表示されなくなります。（※ステータスバーのクリックか、コマンドパレットからコマンドを選択して集計を行えます。）"
         },
         "numberAggregator.maxSelectionLength": {
           "type": "number",
           "default": 1000,
-          "description": "選択した文字列の最大文字数。"
+          "description": "リアルタイム集計を行う最大文字数。選択範囲の文字数がこの設定値を超えると、集計を行わずステータスバーに集計値が表示されなくなります。（※ステータスバーのクリックか、コマンドパレットからコマンドを選択して集計を行えます。）"
         },
         "numberAggregator.aggregateOnlyIsolatedNumbers": {
           "type": "boolean",
@@ -58,7 +58,7 @@
         "numberAggregator.decimalPlaces": {
           "type": "number",
           "default": 2,
-          "description": "小数点以下の桁数。"
+          "description": "小数点以下の桁数。ステータスバーに表示される集計値の小数点以下の桁数を指定します。"
         }
       }
     }
