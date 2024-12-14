@@ -8,7 +8,7 @@ let icon = '🔢' // '🧮'
 /** ステータスバーアイテムの生成 */
 export const createStatusBarItem = () => {
   const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100)
-  statusBarItem.command = 'numberAggregator.copyResults'
+  statusBarItem.command = 'number-aggregator.copyResults'
   return statusBarItem
 }
 
@@ -29,7 +29,7 @@ export const updateStatusBar = async (
     // 閾値を超えている場合は集計せず手動集計を促すメッセージを表示
     statusBarItem.text = `${icon}選択範囲の数値を集計`
     statusBarItem.tooltip = `クリックして選択範囲の数値を集計（数字の数: ${numbers.length}, 選択文字数: ${text.length}）`
-    statusBarItem.command = 'numberAggregator.aggregateSelectedText'
+    statusBarItem.command = 'number-aggregator.aggregateSelectedText'
     statusBarItem.show()
   } else {
     // 集計結果の表示
@@ -55,7 +55,7 @@ export const aggregateSelectedText = (
   // 集計結果の表示
   statusBarItem.text = getAggregateResultForStatus(aggregateResult, settings)
   statusBarItem.tooltip = 'クリックして集計結果をコピー'
-  statusBarItem.command = 'numberAggregator.copyResults'
+  statusBarItem.command = 'number-aggregator.copyResults'
   statusBarItem.show()
 }
 
