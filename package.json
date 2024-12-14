@@ -49,6 +49,11 @@
           "type": "number",
           "default": 1000,
           "description": "選択した文字列の最大文字数。"
+        },
+        "numberAggregator.aggregateOnlyIsolatedNumbers": {
+          "type": "boolean",
+          "default": true,
+          "description": "数字が含まれる単語の数字は集計対象としない。（前後にスペースや改行がある数字のみ集計対象にする。）"
         }
       }
     }
