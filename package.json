@@ -3,7 +3,7 @@
   "displayName": "Number Aggregator",
   "version": "0.0.1",
   "publisher": "octetdesign",
-  "description": "選択した文字列から数値を集計してステータスバーに表示する VS Code 拡張機能。",
+  "description": "エディタの選択範囲に含まれる数値を集計してリアルタイムにステータスバーに表示する Visual Studio Code 拡張機能",
   "engines": {
     "vscode": "^1.95.0"
   },
@@ -26,12 +26,12 @@
   "contributes": {
     "commands": [
       {
-        "command": "numberAggregator.aggregateSelectedText",
+        "command": "number-aggregator.aggregateSelectedText",
         "title": "選択範囲の数値を集計",
         "category": "Number Aggregator"
       },
       {
-        "command": "numberAggregator.copyResults",
+        "command": "number-aggregator.copyResults",
         "title": "集計結果をコピー",
         "category": "Number Aggregator"
       }
@@ -40,15 +40,25 @@
       "type": "object",
       "title": "Number Aggregator Configuration",
       "properties": {
-        "numberAggregator.maxNumbers": {
+        "number-aggregator.maxNumbers": {
           "type": "number",
           "default": 30,
-          "description": "選択した文字列から抽出できる最大の数字の数。"
+          "description": "リアルタイム集計を行う対象となる数字の最大数です。選択範囲から抽出された数字の数がこの設定値を超えた場合、集計は行われず、ステータスバーには集計値が表示されなくなります。（※ステータスバーをクリックするか、コマンドパレットからコマンドを選択して手動で集計を行うことができます。）"
         },
-        "numberAggregator.maxSelectionLength": {
+        "number-aggregator.maxSelectionLength": {
           "type": "number",
           "default": 1000,
-          "description": "選択した文字列の最大文字数。"
+          "description": "リアルタイム集計を行う最大文字数です。選択範囲の文字数がこの設定値を超えた場合、集計は行われず、ステータスバーには集計値が表示されなくなります。（※ステータスバーをクリックするか、コマンドパレットからコマンドを選択して手動で集計を行うことができます。）"
+        },
+        "number-aggregator.aggregateOnlyIsolatedNumbers": {
+          "type": "boolean",
+          "default": true,
+          "description": "数字が含まれる単語の数字は集計対象としない。（前後にスペースや改行がある数字のみ集計対象にします。）"
+        },
+        "number-aggregator.decimalPlaces": {
+          "type": "number",
+          "default": 2,
+          "description": "小数点以下の桁数。ステータスバーに表示される集計値の小数点以下の桁数を指定します。"
         }
       }
     }
