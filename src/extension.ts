@@ -12,6 +12,7 @@ interface ExtensionSettings {
   maxNumbers: number
   maxSelectionLength: number
   aggregateOnlyIsolatedNumbers: boolean
+  decimalPlaces: number
 }
 
 /** 拡張機能の有効化（初期化処理） */
@@ -21,10 +22,12 @@ export const activate = (context: vscode.ExtensionContext) => {
   const maxNumbers = config.get<number>('maxNumbers', 100)
   const maxSelectionLength = config.get<number>('maxSelectionLength', 1000)
   const aggregateOnlyIsolatedNumbers = config.get<boolean>('aggregateOnlyIsolatedNumbers', true)
+  const decimalPlaces = config.get<number>('decimalPlaces', 2)
   const settings: ExtensionSettings = {
     maxNumbers,
     maxSelectionLength,
     aggregateOnlyIsolatedNumbers,
+    decimalPlaces,
   }
 
   // ステータスバーアイテムの生成と登録
@@ -83,7 +86,7 @@ const aggregateSelectedText = (settings: ExtensionSettings) => {
   }
 
   // 集計値の表示
-  statusBarItem.text = getAggregateResultForStatus(aggregate(numbers))
+  statusBarItem.text = getAggregateResultForStatus(aggregate(numbers), settings)
   statusBarItem.tooltip = 'クリックして集計結果をコピー'
   statusBarItem.command = 'numberAggregator.copyResults'
   statusBarItem.show()
@@ -138,30 +141,38 @@ const aggregate = (numbers: number[]) => {
 }
 
 /** 数値を丸める */
-const toFixed = (num: number) => num.toFixed(2).replace(/0+$/, '').replace(/\.$/, '')
+const toFixed = (num: number, decimalPlaces: number, trim: boolean = true) => {
+  const value = num.toFixed(decimalPlaces)
+  return trim ? value.replace(/0+$/, '').replace(/\.$/, '') : value
+}
 
 /** ステータスバーアイテム用の集計結果テキストを取得する */
-const getAggregateResultForStatus = ({ count, total, average }: ReturnType<typeof aggregate>) => {
-  return `${icon} 個数: ${count} 合計: ${toFixed(total)} 平均: ${toFixed(average)}`
+const getAggregateResultForStatus = (
+  { count, total, average }: ReturnType<typeof aggregate>,
+  { decimalPlaces }: ExtensionSettings
+) => {
+  return `${icon} 個数: ${count} 合計: ${toFixed(total, decimalPlaces)} 平均: ${toFixed(
+    average,
+    decimalPlaces
+  )}`
 }
 
 /** クリップボードコピー用の集計結果テキストを取得する */
-const getAggregateResultForCopy = ({
-  numbers,
-  count,
-  total,
-  average,
-}: ReturnType<typeof aggregate>) => {
+const getAggregateResultForCopy = (
+  { numbers, count, total, average }: ReturnType<typeof aggregate>,
+  { decimalPlaces }: ExtensionSettings
+) => {
   // 丸めた集計値と差があるか
   const diff =
-    String(toFixed(total)) !== String(total) || String(toFixed(average)) !== String(average)
+    String(toFixed(total, decimalPlaces)) !== String(total) ||
+    String(toFixed(average, decimalPlaces)) !== String(average)
   // テキストの生成
   let text = ``
   text += `個数\t${count}`
   text += `\n合計\t${total}`
-  text += diff && `\t${toFixed(total)}`
+  text += diff && `\t${toFixed(total, decimalPlaces, false)}`
   text += `\n平均\t${average}`
-  text += diff && `\t${toFixed(average)}`
+  text += diff && `\t${toFixed(average, decimalPlaces, false)}`
   text += `\n集計対象\t${numbers.join('\t')}`
   return text
 }
@@ -181,8 +192,8 @@ const copyResults = async (settings: ExtensionSettings) => {
   }
 
   const getAggregateResult = aggregate(numbers)
-  statusBarItem.text = getAggregateResultForStatus(getAggregateResult)
-  await vscode.env.clipboard.writeText(getAggregateResultForCopy(getAggregateResult))
+  statusBarItem.text = getAggregateResultForStatus(getAggregateResult, settings)
+  await vscode.env.clipboard.writeText(getAggregateResultForCopy(getAggregateResult, settings))
   vscode.window.showInformationMessage('集計結果をクリップボードにコピーしました。')
 }
 
