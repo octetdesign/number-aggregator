@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'
-import { Big } from 'big.js'
+import { aggregate } from './aggregate'
 
 /** アイコン */
 let icon = '🔢' // '🧮'
@@ -130,21 +130,6 @@ const extractNumbers = (text: string) => {
   return numbers
 }
 
-/** 数値を集計する */
-const aggregate = (numbers: number[]) => {
-  // 個数
-  const count = numbers.length
-  // 合計
-  let total = new Big(0)
-  numbers.forEach((num) => {
-    total = total.plus(new Big(num))
-  })
-  // 平均
-  const average = count > 0 ? total.div(new Big(count)) : new Big(0)
-
-  return { numbers, count, total: total.toNumber(), average: average.toNumber() }
-}
-
 /** 数値を丸める */
 const toFixed = (num: number, decimalPlaces: number, trim: boolean = true) => {
   const value = num.toFixed(decimalPlaces)
@@ -152,9 +137,9 @@ const toFixed = (num: number, decimalPlaces: number, trim: boolean = true) => {
 }
 
 /** ステータスバー用の集計結果テキストを取得する */
-const getAggregateResultForStatus = ({ count, total, average }: ReturnType<typeof aggregate>) => {
+const getAggregateResultForStatus = ({ count, summary, average }: ReturnType<typeof aggregate>) => {
   const { decimalPlaces } = settings
-  return `${icon} 個数: ${count} 合計: ${toFixed(total, decimalPlaces)} 平均: ${toFixed(
+  return `${icon} 個数: ${count} 合計: ${toFixed(summary, decimalPlaces)} 平均: ${toFixed(
     average,
     decimalPlaces
   )}`
@@ -164,21 +149,22 @@ const getAggregateResultForStatus = ({ count, total, average }: ReturnType<typeo
 const getAggregateResultForCopy = ({
   numbers,
   count,
-  total,
+  summary,
   average,
+  median,
+  min,
+  max,
 }: ReturnType<typeof aggregate>) => {
   const { decimalPlaces } = settings
-  // 丸めた集計値と差があるか
-  const diff =
-    String(toFixed(total, decimalPlaces)) !== String(total) ||
-    String(toFixed(average, decimalPlaces)) !== String(average)
   // テキストの生成
   let text = ``
-  text += `個数\t${count}`
-  text += `\n合計\t${total}`
-  text += diff ? `\t${toFixed(total, decimalPlaces, false)}` : ''
+  text += `集計対象\t${numbers.join('\t')}`
+  text += `\n個数\t${count}`
+  text += `\n合計\t${summary}`
   text += `\n平均\t${average}`
-  text += diff ? `\t${toFixed(average, decimalPlaces, false)}` : ''
-  text += `\n集計対象\t${numbers.join('\t')}`
+  text += `\n中央値\t${median}`
+  text += `\n最小値\t${min}`
+  text += `\n最大値\t${max}`
+  text += `\n`
   return text
 }
