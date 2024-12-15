@@ -33,8 +33,9 @@ export const loadSettings = () => {
 
 /** ステータスバーアイテムの生成 */
 export const createStatusBarItem = () => {
-  const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100)
+  const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 101) // NOTE: 101以上でカーソル位置表示より左に表示される
   statusBarItem.command = 'number-aggregator.copyResults'
+  statusBarItem.name = '数値の集計値'
   return statusBarItem
 }
 
@@ -50,8 +51,9 @@ export const updateStatusBar = async (statusBarItem: vscode.StatusBarItem) => {
   const { text, numbers } = selectionData
   if (numbers.length > settings.maxNumbers || text.length > settings.maxSelectionLength) {
     // 閾値を超えている場合は集計せず手動集計を促すメッセージを表示
+    // statusBarItem.text = `$(symbol-operator) 選択範囲の数値を集計`
     statusBarItem.text = `${icon}選択範囲の数値を集計`
-    statusBarItem.tooltip = `クリックして選択範囲の数値を集計（数字の数: ${numbers.length}, 選択文字数: ${text.length}）`
+    statusBarItem.tooltip = `クリックして選択範囲の数値を集計（数値の数: ${numbers.length}, 選択文字数: ${text.length}）`
     statusBarItem.command = 'number-aggregator.aggregateSelectedText'
     statusBarItem.show()
   } else {
