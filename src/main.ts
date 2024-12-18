@@ -2,7 +2,7 @@ import * as vscode from 'vscode'
 import { aggregate } from './aggregate'
 
 /** アイコン */
-let icon = '🔢' // '🧮'
+let icon: string | undefined
 
 /** 設定 */
 export interface ExtensionSettings {
@@ -14,6 +14,8 @@ export interface ExtensionSettings {
   aggregateOnlyIsolatedNumbers: boolean
   /** 小数点以下の桁数 */
   decimalPlaces: number
+  /** アイコン */
+  icon?: string
 }
 
 /** 設定オブジェクト */
@@ -27,8 +29,12 @@ export const loadSettings = () => {
     maxSelectionLength: config.get<number>('maxSelectionLength', 1000),
     aggregateOnlyIsolatedNumbers: config.get<boolean>('aggregateOnlyIsolatedNumbers', true),
     decimalPlaces: config.get<number>('decimalPlaces', 2),
+    icon: config.get<string>('icon', '🔢'),
   }
   // console.log({ settings })
+
+  // アイコンの適用
+  icon = settings.icon
 }
 
 /** ステータスバーアイテムの生成 */
