@@ -1,9 +1,9 @@
 {
   "name": "number-aggregator",
   "displayName": "Number Aggregator",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "publisher": "octetdesign",
-  "description": "エディタの選択範囲に含まれる数値を集計してリアルタイムにステータスバーに表示する Visual Studio Code 拡張機能です。",
+  "description": "%extension.description%",
   "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.95.0"
@@ -28,12 +28,12 @@
     "commands": [
       {
         "command": "number-aggregator.aggregateSelectedText",
-        "title": "選択範囲の数値を集計",
+        "title": "%command.aggregateSelectedText.title%",
         "category": "Number Aggregator"
       },
       {
         "command": "number-aggregator.copyResults",
-        "title": "集計結果をコピー",
+        "title": "%command.copyResults.title%",
         "category": "Number Aggregator"
       }
     ],
@@ -45,48 +45,49 @@
           "order": 10,
           "type": "boolean",
           "default": true,
-          "description": "数字が含まれる単語の数字は集計対象としない。（前後にスペースや改行がある数字のみ集計対象にします。）"
+          "description": "%configuration.aggregateOnlyIsolatedNumbers.description%"
         },
         "number-aggregator.decimalPlaces": {
           "order": 20,
           "type": "number",
           "default": 2,
-          "description": "小数点以下の桁数。ステータスバーに表示される集計値の小数点以下の桁数を指定します。"
+          "description": "%configuration.decimalPlaces.description%"
         },
         "number-aggregator.icon": {
           "order": 30,
           "type": "string",
           "default": "🔢",
           "maxLength": 2,
-          "description": "ステータスバーに表示するアイコンを設定します。（お好きな絵文字を📛）"
+          "description": "%configuration.icon.description%"
         },
         "number-aggregator.maxNumbers": {
           "order": 40,
           "type": "number",
           "default": 30,
           "minimum": 0,
-          "description": "リアルタイム集計を行う対象となる数字の最大数です。選択範囲から抽出された数字の数がこの設定値を超えた場合、集計は行われず、ステータスバーには集計値が表示されなくなります。（※ステータスバーをクリックするか、コマンドパレットからコマンドを選択して手動で集計を行うことができます。）"
+          "description": "%configuration.maxNumbers.description%"
         },
         "number-aggregator.maxSelectionLength": {
           "order": 50,
           "type": "number",
           "default": 1000,
           "minimum": 0,
-          "description": "リアルタイム集計を行う最大文字数です。選択範囲の文字数がこの設定値を超えた場合、集計は行われず、ステータスバーには集計値が表示されなくなります。（※ステータスバーをクリックするか、コマンドパレットからコマンドを選択して手動で集計を行うことができます。）"
+          "description": "%configuration.maxSelectionLength.description%"
         }
       }
     }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
-    "compile": "webpack",
+    "compile": "npm run localize && webpack",
     "watch": "webpack --watch",
     "package": "webpack --mode production --devtool hidden-source-map",
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "lint": "eslint src",
-    "test": "vscode-test"
+    "test": "vscode-test",
+    "localize": "npx vscode-nls-dev compile -l en,ja"
   },
   "devDependencies": {
     "@types/big.js": "^6.2.2",
@@ -100,6 +101,7 @@
     "eslint": "^9.13.0",
     "ts-loader": "^9.5.1",
     "typescript": "^5.6.3",
+    "vscode-nls-dev": "^4.0.4",
     "webpack": "^5.95.0",
     "webpack-cli": "^5.1.4"
   },
