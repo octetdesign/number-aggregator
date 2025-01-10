@@ -17,7 +17,7 @@
 
   "message.aggregationResultsCopied": "集計結果をクリップボードにコピーしました。",
 
-  "text.numbersToAggregate": "集計対象",
+  "text.aggregationTargets": "集計対象",
   "text.count": "個数",
   "text.summary": "合計",
   "text.average": "平均",
