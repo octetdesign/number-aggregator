@@ -6,6 +6,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.0.10] - 2025-01-11
+
+### Fixed
+
+- 拡張機能のページが日本語化されていない問題を修正しました。（※ publish 後に確認するので修正できてない可能性あり）
+
 ## [0.0.9] - 2025-01-11
 
 ### Added
