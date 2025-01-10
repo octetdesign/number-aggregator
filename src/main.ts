@@ -1,23 +1,6 @@
 import * as vscode from 'vscode'
 import { aggregate } from './aggregate'
 
-// NOTE: 国際化対応のためのコード（参考：https://qiita.com/wraith13/items/8f873a1867a5cc2865a8）
-import localeEn from '../package.nls.json'
-import localeJa from '../package.nls.ja.json'
-export type LocaleKeyType = keyof typeof localeEn
-interface LocaleEntry {
-  [key: string]: string
-}
-const localeTableKey = vscode.env.language
-const localeTable = Object.assign(
-  localeEn,
-  (<{ [key: string]: LocaleEntry }>{
-    ja: localeJa,
-  })[localeTableKey] || {}
-)
-const localeString = (key: string): string => localeTable[key] || key
-// const localeMap = (key: LocaleKeyType): string => localeString(key)
-
 /** アイコン */
 let icon: string | undefined
 
@@ -58,7 +41,7 @@ export const loadSettings = () => {
 export const createStatusBarItem = () => {
   const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 101) // NOTE: 101以上でカーソル位置表示より左に表示される
   statusBarItem.command = 'number-aggregator.copyResults'
-  statusBarItem.name = localeString('statusBarItem.aggregateNumbers.name') // '数値の集計'
+  statusBarItem.name = vscode.l10n.t('Aggregate Numbers') // '数値の集計'
   return statusBarItem
 }
 
@@ -74,10 +57,11 @@ export const updateStatusBar = async (statusBarItem: vscode.StatusBarItem) => {
   const { text, numbers } = selectionData
   if (numbers.length > settings.maxNumbers || text.length > settings.maxSelectionLength) {
     // 閾値を超えている場合は集計せず手動集計を促すメッセージを表示
-    statusBarItem.text = `${icon}${localeString('statusBarItem.aggregateNumbers.text')}` // `${icon}選択範囲の数値を集計`
-    statusBarItem.tooltip = localeString('statusBarItem.aggregateNumbers.tooltip')
-      .replace('${numbersLength}', String(numbers.length))
-      .replace('${selectionLength}', String(text.length)) // `クリックして選択範囲の数値を集計（数値の数: ${numbersLength}, 選択文字数: ${selectionLength}）`
+    statusBarItem.text = `${icon}${vscode.l10n.t('Aggregate Numbers in the Selection')}` // `選択範囲の数値を集計`
+    statusBarItem.tooltip = vscode.l10n.t(
+      'Click to aggregate numbers in the selection (Number of values: {numbersLength}, Selection length: {selectionLength})',
+      { numbersLength: String(numbers.length), selectionLength: String(text.length) }
+    ) // `クリックして選択範囲の数値を集計（数値の数: {numbersLength}, 選択文字数: {selectionLength}）`
     statusBarItem.command = 'number-aggregator.aggregateSelectedText'
     statusBarItem.show()
   } else {
@@ -100,7 +84,7 @@ export const aggregateSelectedText = (statusBarItem: vscode.StatusBarItem) => {
   const aggregateResult = aggregate(selectionData.numbers)
   // 集計結果の表示
   statusBarItem.text = getAggregateResultForStatus(aggregateResult)
-  statusBarItem.tooltip = localeString('statusBarItem.clickToCopy.tooltip') // 'クリックして集計結果をコピー'
+  statusBarItem.tooltip = vscode.l10n.t('Click to Copy Aggregation Results') // 'クリックして集計結果をコピー'
   statusBarItem.command = 'number-aggregator.copyResults'
   statusBarItem.show()
 }
@@ -119,7 +103,9 @@ export const copyResults = async (statusBarItem: vscode.StatusBarItem) => {
   // クリップボードにコピー
   await vscode.env.clipboard.writeText(getAggregateResultForCopy(aggregateResult))
   // メッセージの表示
-  vscode.window.showInformationMessage(localeString('message.aggregationResultsCopied')) // '集計結果をクリップボードにコピーしました。'
+  vscode.window.showInformationMessage(
+    vscode.l10n.t('Aggregation results copied to the clipboard.')
+  ) // '集計結果をクリップボードにコピーしました。'
 }
 
 /**
@@ -167,11 +153,11 @@ const getAggregateResultForStatus = ({ count, summary, average }: ReturnType<typ
   const { decimalPlaces } = settings
   return (
     `${icon} ` +
-    `${localeString('text.count')}: ` + // '個数: '
+    `${vscode.l10n.t('Count')}: ` + // '個数: '
     `${count} ` +
-    `${localeString('text.summary')}: ` + // '合計: '
+    `${vscode.l10n.t('Summary')}: ` + // '合計: '
     `${toFixed(summary, decimalPlaces)} ` +
-    `${localeString('text.average')}: ` + // '平均: '
+    `${vscode.l10n.t('Average')}: ` + // '平均: '
     `${toFixed(average, decimalPlaces)}`
   )
 }
@@ -188,13 +174,13 @@ const getAggregateResultForCopy = ({
 }: ReturnType<typeof aggregate>) => {
   // テキストの生成
   let text = ``
-  text += `${localeString('text.aggregationTargets')}\t${numbers.join('\t')}` // 集計対象
-  text += `\n${localeString('text.count')}\t${count}` // 個数
-  text += `\n${localeString('text.summary')}\t${summary}` // 合計
-  text += `\n${localeString('text.average')}\t${average}` // 平均
-  text += `\n${localeString('text.median')}\t${median}` // 中央値
-  text += `\n${localeString('text.min')}\t${min}` // 最小値
-  text += `\n${localeString('text.max')}\t${max}` // 最大値
+  text += `${vscode.l10n.t('Aggregation Targets')}\t${numbers.join('\t')}` // 集計対象
+  text += `\n${vscode.l10n.t('Count')}\t${count}` // 個数
+  text += `\n${vscode.l10n.t('Summary')}\t${summary}` // 合計
+  text += `\n${vscode.l10n.t('Average')}\t${average}` // 平均
+  text += `\n${vscode.l10n.t('Median')}\t${median}` // 中央値
+  text += `\n${vscode.l10n.t('Minimum')}\t${min}` // 最小値
+  text += `\n${vscode.l10n.t('Maximum')}\t${max}` // 最大値
   text += `\n`
   return text
 }

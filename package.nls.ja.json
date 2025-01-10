@@ -8,20 +8,5 @@
   "configuration.decimalPlaces.description": "小数点以下の桁数。ステータスバーに表示される集計値の小数点以下の桁数を指定します。",
   "configuration.icon.description": "ステータスバーに表示するアイコンを設定します。（お好きな絵文字を📛）",
   "configuration.maxNumbers.description": "リアルタイム集計を行う対象となる数字の最大数です。選択範囲から抽出された数字の数がこの設定値を超えた場合、集計は行われず、ステータスバーには集計値が表示されなくなります。（※ステータスバーをクリックするか、コマンドパレットからコマンドを選択して手動で集計を行うことができます。）",
-  "configuration.maxSelectionLength.description": "リアルタイム集計を行う最大文字数です。選択範囲の文字数がこの設定値を超えた場合、集計は行われず、ステータスバーには集計値が表示されなくなります。（※ステータスバーをクリックするか、コマンドパレットからコマンドを選択して手動で集計を行うことができます。）",
-
-  "statusBarItem.aggregateNumbers.name": "数値の集計",
-  "statusBarItem.aggregateNumbers.text": "選択範囲の数値を集計",
-  "statusBarItem.aggregateNumbers.tooltip": "クリックして選択範囲の数値を集計（数値の数: ${numbersLength}, 選択文字数: ${selectionLength}）",
-  "statusBarItem.clickToCopy.tooltip": "クリックして集計結果をコピー",
-
-  "message.aggregationResultsCopied": "集計結果をクリップボードにコピーしました。",
-
-  "text.aggregationTargets": "集計対象",
-  "text.count": "個数",
-  "text.summary": "合計",
-  "text.average": "平均",
-  "text.median": "中央値",
-  "text.min": "最小値",
-  "text.max": "最大値"
+  "configuration.maxSelectionLength.description": "リアルタイム集計を行う最大文字数です。選択範囲の文字数がこの設定値を超えた場合、集計は行われず、ステータスバーには集計値が表示されなくなります。（※ステータスバーをクリックするか、コマンドパレットからコマンドを選択して手動で集計を行うことができます。）"
 }

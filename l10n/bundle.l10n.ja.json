@@ -1,0 +1,15 @@
+{
+  "Aggregate Numbers": "数値の集計",
+  "Aggregate Numbers in the Selection": "選択範囲の数値を集計",
+  "Click to aggregate numbers in the selection (Number of values: {numbersLength}, Selection length: {selectionLength})": "クリックして選択範囲の数値を集計（数値の数: {numbersLength}, 選択文字数: {selectionLength}）",
+  "Click to Copy Aggregation Results": "クリックして集計結果をコピー",
+  "Aggregation results copied to the clipboard.": "集計結果をクリップボードにコピーしました。",
+
+  "Aggregation Targets": "集計対象",
+  "Count": "個数",
+  "Summary": "合計",
+  "Average": "平均",
+  "Median": "中央値",
+  "Minimum": "最小値",
+  "Maximum": "最大値"
+}
