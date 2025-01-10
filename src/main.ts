@@ -41,7 +41,7 @@ export const loadSettings = () => {
 export const createStatusBarItem = () => {
   const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 101) // NOTE: 101以上でカーソル位置表示より左に表示される
   statusBarItem.command = 'number-aggregator.copyResults'
-  statusBarItem.name = '数値の集計値'
+  statusBarItem.name = vscode.l10n.t('Aggregate Numbers') // '数値の集計'
   return statusBarItem
 }
 
@@ -57,9 +57,11 @@ export const updateStatusBar = async (statusBarItem: vscode.StatusBarItem) => {
   const { text, numbers } = selectionData
   if (numbers.length > settings.maxNumbers || text.length > settings.maxSelectionLength) {
     // 閾値を超えている場合は集計せず手動集計を促すメッセージを表示
-    // statusBarItem.text = `$(symbol-operator) 選択範囲の数値を集計`
-    statusBarItem.text = `${icon}選択範囲の数値を集計`
-    statusBarItem.tooltip = `クリックして選択範囲の数値を集計（数値の数: ${numbers.length}, 選択文字数: ${text.length}）`
+    statusBarItem.text = `${icon}${vscode.l10n.t('Aggregate Numbers in the Selection')}` // `選択範囲の数値を集計`
+    statusBarItem.tooltip = vscode.l10n.t(
+      'Click to aggregate numbers in the selection (Number of values: {numbersLength}, Selection length: {selectionLength})',
+      { numbersLength: String(numbers.length), selectionLength: String(text.length) }
+    ) // `クリックして選択範囲の数値を集計（数値の数: {numbersLength}, 選択文字数: {selectionLength}）`
     statusBarItem.command = 'number-aggregator.aggregateSelectedText'
     statusBarItem.show()
   } else {
@@ -82,7 +84,7 @@ export const aggregateSelectedText = (statusBarItem: vscode.StatusBarItem) => {
   const aggregateResult = aggregate(selectionData.numbers)
   // 集計結果の表示
   statusBarItem.text = getAggregateResultForStatus(aggregateResult)
-  statusBarItem.tooltip = 'クリックして集計結果をコピー'
+  statusBarItem.tooltip = vscode.l10n.t('Click to Copy Aggregation Results') // 'クリックして集計結果をコピー'
   statusBarItem.command = 'number-aggregator.copyResults'
   statusBarItem.show()
 }
@@ -101,12 +103,14 @@ export const copyResults = async (statusBarItem: vscode.StatusBarItem) => {
   // クリップボードにコピー
   await vscode.env.clipboard.writeText(getAggregateResultForCopy(aggregateResult))
   // メッセージの表示
-  vscode.window.showInformationMessage('集計結果をクリップボードにコピーしました。')
+  vscode.window.showInformationMessage(
+    vscode.l10n.t('Aggregation results copied to the clipboard.')
+  ) // '集計結果をクリップボードにコピーしました。'
 }
 
 /**
  * 選択範囲の文字列と選択範囲から抽出した数値を取得する
- * ※数値が抽出できた場合のみ結果を返す。
+ * ※数値が２つ以上抽出できた場合のみ結果を返す。
  *  */
 const getSelectionData = () => {
   const editor = vscode.window.activeTextEditor
@@ -120,7 +124,7 @@ const getSelectionData = () => {
   }
   // 数値の抽出
   const numbers = extractNumbers(text)
-  if (numbers.length === 0) {
+  if (numbers.length < 2) {
     return
   }
   return { text, numbers }
@@ -147,10 +151,15 @@ const toFixed = (num: number, decimalPlaces: number, trim: boolean = true) => {
 /** ステータスバー用の集計結果テキストを取得する */
 const getAggregateResultForStatus = ({ count, summary, average }: ReturnType<typeof aggregate>) => {
   const { decimalPlaces } = settings
-  return `${icon} 個数: ${count} 合計: ${toFixed(summary, decimalPlaces)} 平均: ${toFixed(
-    average,
-    decimalPlaces
-  )}`
+  return (
+    `${icon} ` +
+    `${vscode.l10n.t('Count')}: ` + // '個数: '
+    `${count} ` +
+    `${vscode.l10n.t('Summary')}: ` + // '合計: '
+    `${toFixed(summary, decimalPlaces)} ` +
+    `${vscode.l10n.t('Average')}: ` + // '平均: '
+    `${toFixed(average, decimalPlaces)}`
+  )
 }
 
 /** クリップボードコピー用の集計結果テキストを取得する */
@@ -163,16 +172,15 @@ const getAggregateResultForCopy = ({
   min,
   max,
 }: ReturnType<typeof aggregate>) => {
-  const { decimalPlaces } = settings
   // テキストの生成
   let text = ``
-  text += `集計対象\t${numbers.join('\t')}`
-  text += `\n個数\t${count}`
-  text += `\n合計\t${summary}`
-  text += `\n平均\t${average}`
-  text += `\n中央値\t${median}`
-  text += `\n最小値\t${min}`
-  text += `\n最大値\t${max}`
+  text += `${vscode.l10n.t('Aggregation Targets')}\t${numbers.join('\t')}` // 集計対象
+  text += `\n${vscode.l10n.t('Count')}\t${count}` // 個数
+  text += `\n${vscode.l10n.t('Summary')}\t${summary}` // 合計
+  text += `\n${vscode.l10n.t('Average')}\t${average}` // 平均
+  text += `\n${vscode.l10n.t('Median')}\t${median}` // 中央値
+  text += `\n${vscode.l10n.t('Minimum')}\t${min}` // 最小値
+  text += `\n${vscode.l10n.t('Maximum')}\t${max}` // 最大値
   text += `\n`
   return text
 }

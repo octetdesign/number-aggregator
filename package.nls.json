@@ -1,0 +1,12 @@
+{
+  "extension.description": "A Visual Studio Code extension that aggregates numbers included in the editor's selection and displays the result in the status bar in real-time.",
+
+  "command.aggregateSelectedText.title": "Aggregate Numbers in Selection",
+  "command.copyResults.title": "Copy Aggregation Results",
+
+  "configuration.aggregateOnlyIsolatedNumbers.description": "Exclude numbers within words from aggregation. (Only numbers surrounded by spaces or line breaks will be aggregated.)",
+  "configuration.decimalPlaces.description": "Decimal places: Specifies the number of decimal places for the aggregated values displayed in the status bar.",
+  "configuration.icon.description": "Sets the icon displayed in the status bar. (Feel free to use your favorite emoji 📛)",
+  "configuration.maxNumbers.description": "The maximum number of numbers to aggregate in real-time. If the number of extracted numbers from the selection exceeds this value, aggregation will not occur, and the aggregated value will not be displayed in the status bar. (※ You can manually aggregate by clicking the status bar or selecting a command from the command palette.)",
+  "configuration.maxSelectionLength.description": "The maximum number of characters to aggregate in real-time. If the character count of the selection exceeds this value, aggregation will not occur, and the aggregated value will not be displayed in the status bar. (※ You can manually aggregate by clicking the status bar or selecting a command from the command palette.)"
+}
