@@ -124,7 +124,7 @@ export const copyResults = async (statusBarItem: vscode.StatusBarItem) => {
 
 /**
  * 選択範囲の文字列と選択範囲から抽出した数値を取得する
- * ※数値が抽出できた場合のみ結果を返す。
+ * ※数値が２つ以上抽出できた場合のみ結果を返す。
  *  */
 const getSelectionData = () => {
   const editor = vscode.window.activeTextEditor
@@ -138,7 +138,7 @@ const getSelectionData = () => {
   }
   // 数値の抽出
   const numbers = extractNumbers(text)
-  if (numbers.length === 0) {
+  if (numbers.length < 2) {
     return
   }
   return { text, numbers }
