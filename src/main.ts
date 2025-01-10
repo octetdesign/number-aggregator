@@ -188,7 +188,7 @@ const getAggregateResultForCopy = ({
 }: ReturnType<typeof aggregate>) => {
   // テキストの生成
   let text = ``
-  text += `${localeString('text.numbersToAggregate')}\t${numbers.join('\t')}` // 集計対象
+  text += `${localeString('text.aggregationTargets')}\t${numbers.join('\t')}` // 集計対象
   text += `\n${localeString('text.count')}\t${count}` // 個数
   text += `\n${localeString('text.summary')}\t${summary}` // 合計
   text += `\n${localeString('text.average')}\t${average}` // 平均

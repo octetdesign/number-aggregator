@@ -17,11 +17,11 @@
 
   "message.aggregationResultsCopied": "Aggregation results copied to the clipboard.",
 
-  "text.numbersToAggregate": "Numbers To Aggregate",
+  "text.aggregationTargets": "Aggregation Targets",
   "text.count": "Count",
   "text.summary": "Summary",
   "text.average": "Average",
   "text.median": "Median",
-  "text.min": "Min",
-  "text.max": "Max"
+  "text.min": "Minimum",
+  "text.max": "Maximum"
 }
