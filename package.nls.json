@@ -1,5 +1,5 @@
 {
-  "extension.description": "A Visual Studio Code extension that aggregates numbers included in the editor's selection and displays the result in the status bar in real-time.",
+  "extension.description": "Aggregates the numerical values within the selected range in the editor and displays the total in real time on the status bar.",
 
   "command.aggregateSelectedText.title": "Aggregate Numbers in Selection",
   "command.copyResults.title": "Copy Aggregation Results",
