@@ -1,7 +1,7 @@
 {
   "name": "number-aggregator",
   "displayName": "Number Aggregator",
-  "version": "0.0.9",
+  "version": "0.0.12",
   "publisher": "octetdesign",
   "description": "%extension.description%",
   "icon": "images/icon.png",
@@ -13,6 +13,17 @@
   },
   "categories": [
     "Other"
+  ],
+  "keywords": [
+    "number",
+    "aggregate",
+    "selection",
+    "count",
+    "summary",
+    "average",
+    "median",
+    "minimum",
+    "maximum"
   ],
   "pricing": "Free",
   "license": "MIT",

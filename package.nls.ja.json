@@ -1,5 +1,5 @@
 {
-  "extension.description": "エディタの選択範囲に含まれる数値を集計してリアルタイムにステータスバーに表示する Visual Studio Code 拡張機能です。",
+  "extension.description": "エディタの選択範囲に含まれる数値を集計してリアルタイムにステータスバーに表示します。",
 
   "command.aggregateSelectedText.title": "選択範囲の数値を集計",
   "command.copyResults.title": "集計結果をコピー",
