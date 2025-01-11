@@ -1,7 +1,7 @@
 {
   "name": "number-aggregator",
   "displayName": "Number Aggregator",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "publisher": "octetdesign",
   "description": "%extension.description%",
   "icon": "images/icon.png",

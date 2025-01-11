@@ -1,8 +1,6 @@
 # Number Aggregator
 
-[English](#English) | [日本語](#日本語)
-
-## English
+[※日本語の説明は下にあります。 / The description in Japanese is provided below.](#number-aggregator日本語)
 
 Aggregates the numerical values within the selected range in the editor and displays the total in real time on the status bar.
 
@@ -28,7 +26,7 @@ Aggregates the numerical values within the selected range in the editor and disp
 
 ---
 
-## 日本語
+## Number Aggregator（日本語）
 
 エディタの選択範囲に含まれる数値を集計してリアルタイムにステータスバーに表示します。
 
