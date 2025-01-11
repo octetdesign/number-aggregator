@@ -6,7 +6,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
-## [0.0.14] - 2025-01-11
+## [0.0.15] - 2025-01-11
 
 ### Fixed
 
