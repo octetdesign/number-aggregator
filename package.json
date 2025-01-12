@@ -19,7 +19,7 @@
     "aggregate",
     "selection",
     "count",
-    "summary",
+    "sum",
     "average",
     "median",
     "minimum",

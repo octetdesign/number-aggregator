@@ -1,61 +1,63 @@
-# Number Aggregator
-
 [※日本語の説明は下にあります。 / The description in Japanese is provided below.](#number-aggregator日本語)
 
-Aggregates the numerical values within the selected range in the editor and displays the total in real time on the status bar.
+---
+
+# Number Aggregator
+
+Aggregates numerical values within the selected range in the editor and displays the total in real time on the status bar.
 
 ## Features
 
 - Extracts numbers from the selected text in the editor and displays the aggregated values in the status bar.
   - You can also manually perform aggregation by selecting the command `Aggregate Numbers in Selection` from the command palette.
-  - The aggregated values displayed in the status bar are as follows:
-    - Count, Summary, Average
-- You can copy the aggregation results to the clipboard.
+  - The aggregated values displayed in the status bar are:
+    - Count, Sum, Average
+- Copying aggregation results to the clipboard:
   - Click the aggregation results in the status bar or select the command `Copy Aggregation Results` from the command palette.
-  - The clipboard will contain the list of extracted numbers from the selection (the aggregation targets) and the following aggregated values:
-    - Count, Summary, Average, Median, Minimum, Maximum
-- You can set conditions for real-time aggregation to suppress aggregation processing when a large amount of text is selected.
+  - The clipboard will contain the list of extracted numbers from the selection (aggregation targets) and the following values:
+    - Count, Sum, Average, Median, Minimum, Maximum
+- Configurable conditions for real-time aggregation to prevent processing when large amounts of text are selected.
 
 ## Settings
 
 - `number-aggregator.aggregateOnlyIsolatedNumbers`
-  - Excludes numbers within words from aggregation. (Only numbers with spaces or line breaks before and after them are aggregated.)
+  - Excludes numbers within words from aggregation. (Only numbers with spaces or line breaks before and after them are aggregated)
 - `number-aggregator.decimalPlaces`
-  - The number of decimal places. Specifies the number of decimal places for the aggregated values displayed in the status bar.
+  - Number of decimal places for aggregated values displayed in the status bar.
 - `number-aggregator.icon`
-  - Sets the icon displayed in the status bar.
+  - Icon displayed in the status bar.
 - `number-aggregator.maxNumbers`
-  - The maximum number of numbers for real-time aggregation. If the number of numbers extracted from the selection exceeds this setting value, aggregation will not be performed, and the aggregated values will no longer be displayed in the status bar.
+  - Maximum number of numbers for real-time aggregation. When the number of extracted numbers exceeds this value, aggregation stops and values are no longer displayed in the status bar.
 - `number-aggregator.maxSelectionLength`
-  - The maximum number of characters for real-time aggregation. If the number of characters in the selection exceeds this setting value, aggregation will not be performed, and the aggregated values will no longer be displayed in the status bar.
+  - Maximum number of characters for real-time aggregation. When the selection length exceeds this value, aggregation stops and values are no longer displayed in the status bar.
 
 ---
 
 ## Number Aggregator（日本語）
 
-エディタの選択範囲に含まれる数値を集計してリアルタイムにステータスバーに表示します。
+エディタの選択範囲内の数値を集計し、リアルタイムでステータスバーに表示します。
 
 ## 特徴
 
-- エディタで選択された文字列から数値を抽出してステータスバーに集計値を表示します。
-  - コマンドパレットからコマンド `選択範囲の数値を集計` を選択して手動で集計を実行することもできます。
-  - ステータスバーに表示される集計値は以下の通りです。
+- エディタで選択されたテキストから数値を抽出してステータスバーに集計値を表示します。
+  - コマンドパレットから `選択範囲の数値を集計` を選択して手動で集計を実行することもできます。
+  - ステータスバーに表示される集計値：
     - 個数、合計、平均
 - 集計結果をクリップボードにコピーすることができます。
-  - ステータスバーの集計結果をクリックするか、コマンドパレットからコマンド `集計結果をコピー` を選択します。
-  - クリップボードには選択範囲から抽出した数値のリスト（集計対象）と以下の集計値がコピーされます。
+  - ステータスバーの集計結果をクリックするか、または、コマンドパレットから `集計結果をコピー` を選択します。
+  - コピーされる内容：選択範囲から抽出した数値リスト（集計対象）および以下の集計値
     - 個数、合計、平均、中央値、最小値、最大値
-- リアルタイム集計を行う条件を設定して、大量のテキストが選択された際の集計処理を抑制することができます。
+- 大量テキスト選択時の処理抑制のための集計条件を設定することができます。
 
 ## 設定
 
 - `number-aggregator.aggregateOnlyIsolatedNumbers`
-  - 数字が含まれる単語の数字は集計対象としない。（前後にスペースや改行がある数字のみ集計対象にします。）
+  - 単語内の数値を集計対象から除外。（前後にスペースや改行がある数値のみを集計）
 - `number-aggregator.decimalPlaces`
-  - 小数点以下の桁数。ステータスバーに表示される集計値の小数点以下の桁数を指定します。
+  - ステータスバーに表示される集計値の小数点以下桁数。
 - `number-aggregator.icon`
-  - ステータスバーに表示するアイコンを設定します。
+  - ステータスバーに表示するアイコン。
 - `number-aggregator.maxNumbers`
-  - リアルタイム集計を行う対象となる数字の最大数です。選択範囲から抽出された数字の数がこの設定値を超えた場合、集計は行われず、ステータスバーには集計値が表示されなくなります。
+  - リアルタイム集計の対象となる数値の数の上限。この値を超えた場合、集計を停止します。
 - `number-aggregator.maxSelectionLength`
-  - リアルタイム集計を行う最大文字数です。選択範囲の文字数がこの設定値を超えた場合、集計は行われず、ステータスバーには集計値が表示されなくなります。
+  - リアルタイム集計を行う選択テキストの最大文字数。この値を超えた場合、集計を停止します。

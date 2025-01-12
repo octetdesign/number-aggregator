@@ -1,12 +1,12 @@
 {
-  "extension.description": "Aggregates the numerical values within the selected range in the editor and displays the total in real time on the status bar.",
+  "extension.description": "Aggregates numerical values within the selected range in the editor and displays the total in real time on the status bar.",
 
   "command.aggregateSelectedText.title": "Aggregate Numbers in Selection",
   "command.copyResults.title": "Copy Aggregation Results",
 
-  "configuration.aggregateOnlyIsolatedNumbers.description": "Exclude numbers within words from aggregation. (Only numbers surrounded by spaces or line breaks will be aggregated.)",
-  "configuration.decimalPlaces.description": "Decimal places: Specifies the number of decimal places for the aggregated values displayed in the status bar.",
-  "configuration.icon.description": "Sets the icon displayed in the status bar. (Feel free to use your favorite emoji 📛)",
-  "configuration.maxNumbers.description": "The maximum number of numbers to aggregate in real-time. If the number of extracted numbers from the selection exceeds this value, aggregation will not occur, and the aggregated value will not be displayed in the status bar. (※ You can manually aggregate by clicking the status bar or selecting a command from the command palette.)",
-  "configuration.maxSelectionLength.description": "The maximum number of characters to aggregate in real-time. If the character count of the selection exceeds this value, aggregation will not occur, and the aggregated value will not be displayed in the status bar. (※ You can manually aggregate by clicking the status bar or selecting a command from the command palette.)"
+  "configuration.aggregateOnlyIsolatedNumbers.description": "Excludes numbers within words from aggregation. (Only numbers with spaces or line breaks before and after them are aggregated)",
+  "configuration.decimalPlaces.description": "Number of decimal places for aggregated values displayed in the status bar.",
+  "configuration.icon.description": "Icon displayed in the status bar. (Feel free to use your favorite emoji 📛)",
+  "configuration.maxNumbers.description": "Maximum number of numbers for real-time aggregation. When the number of extracted numbers exceeds this value, aggregation stops and values are no longer displayed in the status bar. (※ You can manually aggregate by clicking the status bar or selecting a command from the command palette.)",
+  "configuration.maxSelectionLength.description": "Maximum number of characters for real-time aggregation. When the selection length exceeds this value, aggregation stops and values are no longer displayed in the status bar. (※ You can manually aggregate by clicking the status bar or selecting a command from the command palette.)"
 }

@@ -4,7 +4,7 @@ import { Big } from 'big.js'
 const count = (numbers: number[]) => new Big(numbers.length)
 
 /** 合計 */
-const summary = (bigNumbers: Big[]) => {
+const sum = (bigNumbers: Big[]) => {
   let sum = new Big(0)
   bigNumbers.forEach((num) => {
     sum = sum.plus(new Big(num))
@@ -41,12 +41,12 @@ const max = (numbers: number[]) => Math.max(...numbers)
 export const aggregate = (numbers: number[]) => {
   const bigNumbers = numbers.map((num) => new Big(num))
   const cnt = count(numbers)
-  let sum = summary(bigNumbers)
+  let sumValue = sum(bigNumbers)
   return {
     numbers,
     count: cnt.toNumber(),
-    summary: sum.toNumber(),
-    average: average(cnt, sum),
+    sum: sumValue.toNumber(),
+    average: average(cnt, sumValue),
     median: median(cnt, bigNumbers),
     min: min(numbers),
     max: max(numbers),
