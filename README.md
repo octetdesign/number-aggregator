@@ -1,10 +1,8 @@
 [※日本語の説明は下にあります。 / The description in Japanese is provided below.](#number-aggregator日本語)
 
----
-
 # Number Aggregator
 
-Aggregates numerical values within the selected range in the editor and displays the total in real time on the status bar.
+Aggregates numerical values within the selected range in the editor and displays them in real time on the status bar.
 
 ## Features
 
