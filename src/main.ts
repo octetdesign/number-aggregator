@@ -149,14 +149,14 @@ const toFixed = (num: number, decimalPlaces: number, trim: boolean = true) => {
 }
 
 /** ステータスバー用の集計結果テキストを取得する */
-const getAggregateResultForStatus = ({ count, summary, average }: ReturnType<typeof aggregate>) => {
+const getAggregateResultForStatus = ({ count, sum, average }: ReturnType<typeof aggregate>) => {
   const { decimalPlaces } = settings
   return (
     `${icon} ` +
     `${vscode.l10n.t('Count')}: ` + // '個数: '
     `${count} ` +
-    `${vscode.l10n.t('Summary')}: ` + // '合計: '
-    `${toFixed(summary, decimalPlaces)} ` +
+    `${vscode.l10n.t('Sum')}: ` + // '合計: '
+    `${toFixed(sum, decimalPlaces)} ` +
     `${vscode.l10n.t('Average')}: ` + // '平均: '
     `${toFixed(average, decimalPlaces)}`
   )
@@ -166,7 +166,7 @@ const getAggregateResultForStatus = ({ count, summary, average }: ReturnType<typ
 const getAggregateResultForCopy = ({
   numbers,
   count,
-  summary,
+  sum,
   average,
   median,
   min,
@@ -176,7 +176,7 @@ const getAggregateResultForCopy = ({
   let text = ``
   text += `${vscode.l10n.t('Aggregation Targets')}\t${numbers.join('\t')}` // 集計対象
   text += `\n${vscode.l10n.t('Count')}\t${count}` // 個数
-  text += `\n${vscode.l10n.t('Summary')}\t${summary}` // 合計
+  text += `\n${vscode.l10n.t('Sum')}\t${sum}` // 合計
   text += `\n${vscode.l10n.t('Average')}\t${average}` // 平均
   text += `\n${vscode.l10n.t('Median')}\t${median}` // 中央値
   text += `\n${vscode.l10n.t('Minimum')}\t${min}` // 最小値

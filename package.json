@@ -1,7 +1,7 @@
 {
   "name": "number-aggregator",
   "displayName": "Number Aggregator",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "publisher": "octetdesign",
   "description": "%extension.description%",
   "icon": "images/icon.png",
@@ -19,7 +19,7 @@
     "aggregate",
     "selection",
     "count",
-    "summary",
+    "sum",
     "average",
     "median",
     "minimum",
