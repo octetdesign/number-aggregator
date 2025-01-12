@@ -1,5 +1,5 @@
 {
-  "extension.description": "Aggregates numerical values within the selected range in the editor and displays the total in real time on the status bar.",
+  "extension.description": "Aggregates numerical values within the selected range in the editor and displays them in real time on the status bar.",
 
   "command.aggregateSelectedText.title": "Aggregate Numbers in Selection",
   "command.copyResults.title": "Copy Aggregation Results",
