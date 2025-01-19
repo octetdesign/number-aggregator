@@ -6,7 +6,7 @@
 
   "configuration.aggregateOnlyIsolatedNumbers.description": "単語内の数値を集計対象から除外。（前後にスペースや改行がある数値のみを集計）",
   "configuration.decimalPlaces.description": "ステータスバーに表示される集計値の小数点以下桁数。",
-  "configuration.icon.description": "ステータスバーに表示するアイコン。。（お好きな絵文字を📛）",
+  "configuration.icon.description": "ステータスバーに表示するアイコン。（お好きな絵文字を📛）",
   "configuration.maxNumbers.description": "リアルタイム集計の対象となる数値の数の上限。この値を超えた場合、集計を停止します。（※ステータスバーをクリックするか、コマンドパレットからコマンドを選択して手動で集計を行うことができます。）",
   "configuration.maxSelectionLength.description": "リアルタイム集計を行う選択テキストの最大文字数。この値を超えた場合、集計を停止します。（※ステータスバーをクリックするか、コマンドパレットからコマンドを選択して手動で集計を行うことができます。）"
 }

@@ -6,6 +6,18 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [1.0.0] - 2025-01-19
+
+### Fixed
+
+- 軽微な修正をしました。
+
+## [0.0.17] - 2025-01-12
+
+### Fixed
+
+- 拡張機能の説明文や文言を校正しました。
+
 ## [0.0.15] - 2025-01-11
 
 ### Fixed

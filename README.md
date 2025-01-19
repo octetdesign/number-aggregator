@@ -33,7 +33,7 @@ Aggregates numerical values within the selected range in the editor and displays
 
 ## Number Aggregator（日本語）
 
-エディタの選択範囲内の数値を集計し、リアルタイムでステータスバーに表示します。
+エディタの選択範囲内の数値をリアルタイムに集計し、ステータスバーに表示します。
 
 ## 特徴
 
