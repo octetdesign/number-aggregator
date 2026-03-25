@@ -109,7 +109,7 @@
     "@typescript-eslint/eslint-plugin": "^8.10.0",
     "@typescript-eslint/parser": "^8.7.0",
     "@vscode/l10n-dev": "^0.0.35",
-    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-cli": "^0.0.12",
     "@vscode/test-electron": "^2.4.1",
     "eslint": "^9.13.0",
     "ts-loader": "^9.5.1",
@@ -121,5 +121,9 @@
     "@vscode/l10n": "^0.0.18",
     "big.js": "^6.2.2"
   },
-  "l10n": "./l10n"
+  "l10n": "./l10n",
+  "overrides": {
+    "serialize-javascript": "^7.0.4",
+    "diff": "^8.0.4"
+  }
 }
